@@ -29,16 +29,32 @@ public class Main{
 
         av.remove(16);
 
-        System.out.print("\nPós-ordem apos remoçao: ");
+        System.out.print("\nPós-ordem apos remoção do menor e do número 16: ");
         av.posordem(av.getRaiz());
         System.out.println();
 
-        System.out.print("In-ordem apos remoçao: ");
+        System.out.print("In-ordem apos remoção do menor e do número 16: ");
         av.inordem(av.getRaiz());
         System.out.println();
 
-        System.out.print("Pré-ordem apos remoçao: ");
+        System.out.print("Pré-ordem apos remoção do menor e do número 16: ");
         av.preordem(av.getRaiz());
         System.out.println();
+
+        av.removeMaior();
+
+        System.out.print("\nPós-ordem apos remoção do maior: ");
+        av.posordem(av.getRaiz());
+        System.out.println();
+
+        System.out.print("In-ordem apos remoção do maior: ");
+        av.inordem(av.getRaiz());
+        System.out.println();
+
+        System.out.print("Pré-ordem apos remoção do maior: ");
+        av.preordem(av.getRaiz());
+        System.out.println();
+
+        
     }
 }
