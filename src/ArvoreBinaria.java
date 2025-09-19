@@ -47,6 +47,20 @@ public class ArvoreBinaria {
         }
     }
 
+    public void removeMaior(){
+        this.raiz = removeMaiorRec(this.raiz);
+    }
+
+    private No removeMaiorRec(No x){
+        if(x == null) return null;
+
+        if(x.getDireita() == null){
+            return x.getEsquerda();
+        }
+        x.setDireita(removeMaiorRec(x.getDireita()));
+        return x
+    }
+
     public void removeMenor(){
         this.raiz = removeMenorRec(this.raiz);
     }
