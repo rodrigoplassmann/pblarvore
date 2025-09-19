@@ -58,7 +58,7 @@ public class ArvoreBinaria {
             return x.getEsquerda();
         }
         x.setDireita(removeMaiorRec(x.getDireita()));
-        return x
+        return x;
     }
 
     public void removeMenor(){
