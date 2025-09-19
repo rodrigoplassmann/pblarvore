@@ -1,39 +1,49 @@
 public class ArvoreBinaria {
     private No raiz;
 
+    public No getRaiz(){
+        return this.raiz;
+    }
+
     public void insere(int info){
         this.raiz = inserearvore(this.raiz, info);
     }
 
     public No inserearvore(No x, int info){
-        if(this.raiz == null){
-            this.raiz = new No(info);
+        if(x == null){
+            x = new No(info);
         }
-        else if(info < this.raiz.getInfo()){
-            this.raiz.setEsquerda(inserearvore(this.raiz.getEsquerda(), info));
+        else if(info < x.getInfo()){
+            x.setEsquerda(inserearvore(x.getEsquerda(), info));
         }
-        else if(info >= this.raiz.getInfo()){
-            this.raiz.setDireita(inserearvore(this.raiz.getDireita(), info));
+        else if(info >= x.getInfo()){
+            x.setDireita(inserearvore(x.getDireita(), info));
         }
 
-        return this.raiz;
+        return x;
     }
 
     public void preordem(No y){
-        System.out.print(this.raiz.getInfo() + " ");
-        preordem(this.raiz.getEsquerda());
-        preordem(this.raiz.getDireita());
+        if (y != null) {
+            System.out.print(y.getInfo() + " ");
+            preordem(y.getEsquerda());
+            preordem(y.getDireita());
+        }
     }
 
     public void inordem(No y){
-        inordem(this.raiz.getEsquerda());
-        System.out.print(this.raiz.getInfo() + " ");
-        inordem(this.raiz.getDireita());
+        if (y != null) {
+            inordem(y.getEsquerda());
+            System.out.print(y.getInfo() + " ");
+            inordem(y.getDireita());
+        }
     }
 
     public void posordem(No y){
-        posordem(this.raiz.getEsquerda());
-        posordem(this.raiz.getDireita());
-        System.out.print(this.raiz.getInfo() + " ");
+        if (y != null) {
+            posordem(y.getEsquerda());
+            posordem(y.getDireita());
+            System.out.print(y.getInfo() + " ");
+        }
     }
 }
