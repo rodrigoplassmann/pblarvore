@@ -46,4 +46,58 @@ public class ArvoreBinaria {
             System.out.print(y.getInfo() + " ");
         }
     }
+
+    public void removeMenor(){
+        this.raiz = removeMenorRec(this.raiz);
+    }
+
+    private No removeMenorRec(No x){
+        if(x == null) return null;
+
+        if(x.getEsquerda() == null){
+            return x.getDireita();
+        }
+
+        x.setEsquerda(removeMenorRec(x.getEsquerda()));
+        return x;
+    }
+
+    public void remove(int valor){
+        this.raiz = removeRec(this.raiz, valor);
+    }
+
+    private No removeRec(No x, int valor){
+        if(x == null) return null;
+
+        if(valor < x.getInfo()){
+            x.setEsquerda(removeRec(x.getEsquerda(), valor));
+        }
+        else if(valor > x.getInfo()){
+            x.setDireita(removeRec(x.getDireita(), valor));
+        }
+        else {
+            if(x.getEsquerda() == null && x.getDireita() == null){
+                return null;
+            }
+            else if(x.getEsquerda() == null){
+                return x.getDireita();
+            }
+            else if(x.getDireita() == null){
+                return x.getEsquerda();
+            }
+            else{
+                No sucessor = encontraMenor(x.getDireita());
+                x.setInfo(sucessor.getInfo());
+                x.setDireita(removeRec(x.getDireita(), sucessor.getInfo()));
+            }
+        }
+        return x;
+    }
+
+    private No encontraMenor(No x){
+        while(x.getEsquerda() != null){
+            x = x.getEsquerda();
+        }
+        return x;
+    }
 }
