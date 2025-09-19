@@ -47,41 +47,57 @@ public class ArvoreBinaria {
         }
     }
 
-    public void remove(int valor){
-        this.raiz = removearvore(this.raiz, valor);
+    public void removeMenor(){
+        this.raiz = removeMenorRec(this.raiz);
     }
 
-    public No removearvore(No y, int valor){
-        if(y == null){
-            return null;
+    private No removeMenorRec(No x){
+        if(x == null) return null;
+
+        if(x.getEsquerda() == null){
+            return x.getDireita();
         }
 
-        if(valor < y.getInfo()){
-            y.setEsquerda(removearvore(y.getEsquerda(), valor));
+        x.setEsquerda(removeMenorRec(x.getEsquerda()));
+        return x;
+    }
+
+    public void remove(int valor){
+        this.raiz = removeRec(this.raiz, valor);
+    }
+
+    private No removeRec(No x, int valor){
+        if(x == null) return null;
+
+        if(valor < x.getInfo()){
+            x.setEsquerda(removeRec(x.getEsquerda(), valor));
         }
-        else if(valor >= y.getInfo()){
-            y.setDireita(removearvore(y.getDireita(), valor));
+        else if(valor > x.getInfo()){
+            x.setDireita(removeRec(x.getDireita(), valor));
         }
-        else{
-            if(y.getEsquerda() == null && y.getDireita() == null){
+        else {
+            if(x.getEsquerda() == null && x.getDireita() == null){
                 return null;
             }
-            else if(y.getEsquerda() == null){
-                return y.getDireita();
+            else if(x.getEsquerda() == null){
+                return x.getDireita();
             }
-            else if(y.getDireita() == null){
-                return y.getEsquerda();
+            else if(x.getDireita() == null){
+                return x.getEsquerda();
             }
             else{
-                No temp = y.getDireita();
-                while(temp.getEsquerda() != null){
-                    temp = temp.getEsquerda();
-                }
-                y.setInfo(temp.getInfo());
-                y.setDireita(removearvore(y.getDireita(), temp.getInfo()));
+                No sucessor = encontraMenor(x.getDireita());
+                x.setInfo(sucessor.getInfo());
+                x.setDireita(removeRec(x.getDireita(), sucessor.getInfo()));
             }
         }
+        return x;
+    }
 
-        return y;
+    private No encontraMenor(No x){
+        while(x.getEsquerda() != null){
+            x = x.getEsquerda();
+        }
+        return x;
     }
 }
