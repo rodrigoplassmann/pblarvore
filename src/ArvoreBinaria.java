@@ -46,4 +46,42 @@ public class ArvoreBinaria {
             System.out.print(y.getInfo() + " ");
         }
     }
+
+    public void remove(int valor){
+        this.raiz = removearvore(this.raiz, valor);
+    }
+
+    public No removearvore(No y, int valor){
+        if(y == null){
+            return null;
+        }
+
+        if(valor < y.getInfo()){
+            y.setEsquerda(removearvore(y.getEsquerda(), valor));
+        }
+        else if(valor >= y.getInfo()){
+            y.setDireita(removearvore(y.getDireita(), valor));
+        }
+        else{
+            if(y.getEsquerda() == null && y.getDireita() == null){
+                return null;
+            }
+            else if(y.getEsquerda() == null){
+                return y.getDireita();
+            }
+            else if(y.getDireita() == null){
+                return y.getEsquerda();
+            }
+            else{
+                No temp = y.getDireita();
+                while(temp.getEsquerda() != null){
+                    temp = temp.getEsquerda();
+                }
+                y.setInfo(temp.getInfo());
+                y.setDireita(removearvore(y.getDireita(), temp.getInfo()));
+            }
+        }
+
+        return y;
+    }
 }
