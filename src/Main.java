@@ -24,5 +24,21 @@ public class Main{
         System.out.print("Pós-ordem: ");
         av.posordem(av.getRaiz());
         System.out.println();
+
+        av.removeMenor();
+
+        av.remove(16);
+
+        System.out.print("\nPós-ordem apos remoçao: ");
+        av.posordem(av.getRaiz());
+        System.out.println();
+
+        System.out.print("In-ordem apos remoçao: ");
+        av.inordem(av.getRaiz());
+        System.out.println();
+
+        System.out.print("Pré-ordem apos remoçao: ");
+        av.preordem(av.getRaiz());
+        System.out.println();
     }
 }
